@@ -1,6 +1,6 @@
-@Assesment.API_HostAddress = http://localhost:5284
+@Assessment.API_HostAddress = http://localhost:5284
 
-GET {{Assesment.API_HostAddress}}/weatherforecast/
+GET {{Assessment.API_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

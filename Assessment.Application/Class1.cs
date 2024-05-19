@@ -1,4 +1,4 @@
-﻿namespace Assesment.Application;
+﻿namespace Assessment.Application;
 
 public class Class1
 {

@@ -1,4 +1,4 @@
-﻿namespace Assesment.Infrastructure;
+﻿namespace Assessment.Infrastructure;
 
 public class Class1
 {

@@ -1,4 +1,4 @@
-﻿namespace Assesment.Domain;
+﻿namespace Assessment.Domain;
 
 public class Class1
 {
