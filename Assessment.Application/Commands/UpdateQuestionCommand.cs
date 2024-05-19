@@ -7,8 +7,8 @@ using MediatR;
 
 namespace Assessment.Application.Commands;
 
-public record UpdateQuestionCommand(string Id, Question Question):IRequest<Question>, IRequest;
-public class UpdateQuestionCommandHandler:IRequestHandler<UpdateQuestionCommand>
+public record UpdateQuestionCommand(Question Question):IRequest<Question>;
+public class UpdateQuestionCommandHandler:IRequestHandler<UpdateQuestionCommand,Question>
 {
     private readonly IQuestionRepository _questionRepository;
     private readonly IMapper _mapper;
@@ -19,16 +19,10 @@ public class UpdateQuestionCommandHandler:IRequestHandler<UpdateQuestionCommand>
         _questionRepository = questionRepository;
     }
 
-    public Task Handle(UpdateQuestionCommand request, CancellationToken cancellationToken)
+    public Task<Question> Handle(UpdateQuestionCommand request, CancellationToken cancellationToken)
     {
-        var targetQuestion = _questionRepository.GetById(request.Id);
-        if (targetQuestion is null)
-        {
-            throw new Exception("question ille");
-        }
-        // var updatedQuestion = _mapper.Map<Question>(request.Question);
-        var question = _questionRepository.Update(request.Id, request.Question);
-        return question;
+        var question = _questionRepository.Update(request.Question.Id, request.Question);
+        return (Task<Question>)question;
         
     }
 }
