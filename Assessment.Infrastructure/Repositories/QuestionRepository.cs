@@ -26,11 +26,27 @@ public class QuestionRepository(IOptions<DataBaseSettings> dataBaseSettings)
 
     public async Task Update(string id, Question question)
     {
-         await _questionCollection.ReplaceOneAsync(q=>q.Id==id,question);
+       // var targetQuestion = GetById(id);
+       var questionById = GetById(id);
+       if ( questionById is null)
+       {
+           throw new Exception("Question Doesn't Exist");
+       }
+
+       if (question.Id!=id)
+       {
+           throw new Exception("Id doesn't match");
+       }
+       await _questionCollection.ReplaceOneAsync(q=>q.Id==id,question);
     }
 
     public async Task Delete(string id)
     {
+        var questionById = GetById(id);
+        if (questionById is null)
+        {
+            throw new Exception("Question doesn't exist");
+        }
         await _questionCollection.DeleteOneAsync(q => q.Id == id);
     }
 }   
