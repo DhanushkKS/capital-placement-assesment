@@ -1,3 +1,5 @@
+using Assessment.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Mongodb configuration
+builder.Services.Configure<DataBaseSettings>(
+    builder.Configuration.GetSection("QuestionDataBase"));
+
 
 var app = builder.Build();
 
