@@ -8,8 +8,7 @@ namespace Assessment.Infrastructure.Repositories;
 public class QuestionRepository(IOptions<DataBaseSettings> dataBaseSettings)
     : QDbContext(dataBaseSettings), IQuestionRepository
 {
-    // private readonly QDbContext _dbContext;
-
+  
     public async Task<List<Question>> GetAll()
     {
         return await _questionCollection.Find(_=>true).ToListAsync();
@@ -25,5 +24,13 @@ public class QuestionRepository(IOptions<DataBaseSettings> dataBaseSettings)
         await _questionCollection.InsertOneAsync(question);
     }
 
-    
+    public async Task Update(string id, Question question)
+    {
+         await _questionCollection.ReplaceOneAsync(q=>q.Id==id,question);
+    }
+
+    public async Task Delete(string id)
+    {
+        await _questionCollection.DeleteOneAsync(q => q.Id == id);
+    }
 }   
