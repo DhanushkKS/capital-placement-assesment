@@ -19,9 +19,10 @@ public class QuestionRepository(IOptions<DataBaseSettings> dataBaseSettings)
         return await _questionCollection.Find(q => q.Id == id).FirstOrDefaultAsync();
     }
 
-    public async Task Create(Question question)
+    public async Task<Question> Create(Question question)
     {
         await _questionCollection.InsertOneAsync(question);
+        return question;
     }
 
     public async Task Update(string id, Question question)

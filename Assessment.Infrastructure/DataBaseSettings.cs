@@ -7,4 +7,6 @@ public class DataBaseSettings
     public string DatabaseName { get; set; } = null!;
 
     public string QuestionsCollectionName { get; set; } = null!;
+
+    public string AnswerCollectionName { get; set; } = null!;
 }

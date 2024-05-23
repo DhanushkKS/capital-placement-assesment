@@ -1,4 +1,6 @@
+using Assessment.Application.Repositories;
 using Assessment.Infrastructure;
+using Assessment.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,12 @@ builder.Services.AddSwaggerGen();
 // Mongodb configuration
 builder.Services.Configure<DataBaseSettings>(
     builder.Configuration.GetSection("QuestionDataBase"));
-
-
+builder.Services.AddSingleton<QDbContext>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddMediatR(
+    m=>m.RegisterServicesFromAssemblies(typeof(IQuestionRepository).Assembly)
+    );
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

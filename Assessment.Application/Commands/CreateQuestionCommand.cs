@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Assessment.Application.Commands;
 
-public record CreateQuestionCommand(CreateQuestionDto Question):IRequest<Question>;
+public record CreateQuestionCommand(CreateQuestionDto Question): IRequest<Question>;
 public class CreateQuestionCommandHandler:IRequestHandler<CreateQuestionCommand,Question>
 {
     private readonly IQuestionRepository _questionRepository;
@@ -22,6 +22,6 @@ public class CreateQuestionCommandHandler:IRequestHandler<CreateQuestionCommand,
     {
         var newQuestion = _mapper.Map<Question>(request.Question);
        var question =  _questionRepository.Create(newQuestion);
-        return  (Task<Question>)question;
+        return  question;
     }
 }

@@ -6,19 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Assessment.API.Controllers.Question;
 
-public class QuestionController:ApiBaseController
+public class QuestionController(IMediator mediator) : ApiBaseController
 {
-    private IMediator _mediator;
-
-    public QuestionController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var questions =await _mediator.Send(new GetAllQuestionsQuery());
+        var questions =await mediator.Send(new GetAllQuestionsQuery());
         return Ok(questions);
     }
 
@@ -26,7 +19,7 @@ public class QuestionController:ApiBaseController
     [Route("{id:length(24)}")]
     public async Task<IActionResult> GetById([FromRoute] string id)
     {
-        var question = await _mediator.Send(new GetQuestionByIdQuery(id));
+        var question = await mediator.Send(new GetQuestionByIdQuery(id));
         return Ok(question);
     }
 
@@ -34,7 +27,7 @@ public class QuestionController:ApiBaseController
     [Route("create")]
     public async Task<IActionResult> Create(CreateQuestionCommand command)
     {
-        var question =await _mediator.Send(command);
+        var question =await mediator.Send(command);
         return Ok(question);
     }
 
@@ -46,7 +39,7 @@ public class QuestionController:ApiBaseController
         {
             throw new Exception("Id's doesn't match");
         }
-        var question = await _mediator.Send(command);
+        var question = await mediator.Send(command);
         return Ok(question);
     }
 
@@ -54,7 +47,7 @@ public class QuestionController:ApiBaseController
     [Route("{id:length(24)}")]
     public async Task<IActionResult> Delete([FromRoute] string id)
     {
-        await _mediator.Send(new DeleteQuestionCommand(id));
+        await mediator.Send(new DeleteQuestionCommand(id));
         return Ok();
     }
 }
