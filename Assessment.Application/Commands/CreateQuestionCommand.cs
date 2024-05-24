@@ -1,13 +1,12 @@
 using Assessment.Application.Dtos;
 using Assessment.Application.Repositories;
-using Assessment.Domain.Question;
 using AutoMapper;
 using MediatR;
 
 namespace Assessment.Application.Commands;
 
-public record CreateQuestionCommand(CreateQuestionDto Question): IRequest<Question>;
-public class CreateQuestionCommandHandler:IRequestHandler<CreateQuestionCommand,Question>
+public record CreateQuestionCommand(CreateQuestionDto Question): IRequest<Domain.Question.Question>;
+public class CreateQuestionCommandHandler:IRequestHandler<CreateQuestionCommand,Domain.Question.Question>
 {
     private readonly IQuestionRepository _questionRepository;
     private readonly IMapper _mapper;
@@ -18,9 +17,9 @@ public class CreateQuestionCommandHandler:IRequestHandler<CreateQuestionCommand,
         _mapper = mapper;
     }
 
-    public Task<Question> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
+    public Task<Domain.Question.Question> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
     {
-        var newQuestion = _mapper.Map<Question>(request.Question);
+        var newQuestion = _mapper.Map<Domain.Question.Question>(request.Question);
        var question =  _questionRepository.Create(newQuestion);
         return  question;
     }

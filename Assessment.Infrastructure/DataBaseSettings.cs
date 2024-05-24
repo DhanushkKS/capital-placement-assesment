@@ -9,4 +9,5 @@ public class DataBaseSettings
     public string QuestionsCollectionName { get; set; } = null!;
 
     public string AnswerCollectionName { get; set; } = null!;
+    public string ResponsesCollectionName { get; set; } = null!;
 }

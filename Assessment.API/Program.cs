@@ -16,6 +16,8 @@ builder.Services.Configure<DataBaseSettings>(
     builder.Configuration.GetSection("QuestionDataBase"));
 builder.Services.AddSingleton<QDbContext>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
+builder.Services.AddScoped<IResponseListRepository, ResponseListRepository>();
 builder.Services.AddMediatR(
     m=>m.RegisterServicesFromAssemblies(typeof(IQuestionRepository).Assembly)
     );
