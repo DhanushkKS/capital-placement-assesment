@@ -4,10 +4,13 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Assesment.API</RootNamespace>
+        <RootNamespace>Assessment.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 

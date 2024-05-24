@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Assesment.API.Controllers;
+namespace Assessment.API.Controllers;
 [ApiController]
 [Route(BasePath+"[controller]")]
 public class ApiBaseController:ControllerBase
