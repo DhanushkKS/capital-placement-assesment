@@ -12,4 +12,9 @@
       <ProjectReference Include="..\Assessment.Domain\Assessment.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+      <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
+    </ItemGroup>
+
 </Project>
